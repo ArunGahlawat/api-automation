@@ -4,13 +4,19 @@ target/
 !**/src/test/**/target/
 
 ### IntelliJ IDEA ###
-.idea/modules.xml
-.idea/jarRepositories.xml
-.idea/compiler.xml
-.idea/libraries/
-*.iws
-*.iml
-*.ipr
+.idea/
+
+### Logs and temp files ###
+**/test-output/
+**/target/
+**/*.DS_Store
+**/allure-report/
+**/allure-results/
+**/.allure/
+**/Cache/
+**/*.iml
+**/logs/
+**/local.xml
 
 ### Eclipse ###
 .apt_generated
