@@ -12,6 +12,7 @@ target/
 **/*.DS_Store
 **/allure-report/
 **/allure-results/
+**/test-report/
 **/.allure/
 **/Cache/
 **/*.iml
