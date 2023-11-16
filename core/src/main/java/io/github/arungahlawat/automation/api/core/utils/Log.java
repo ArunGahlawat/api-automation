@@ -4,6 +4,7 @@ import io.qameta.allure.Step;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
+import org.slf4j.helpers.MessageFormatter;
 
 public class Log {
     private static Logger log;
@@ -27,39 +28,43 @@ public class Log {
         isInitialised = true;
     }
 
+    public static String formatMessage(String message, Object... args) {
+        return MessageFormatter.basicArrayFormat(message, args);
+    }
+
     public static boolean isInfoEnabled() {
         init();
         return log.isInfoEnabled();
     }
 
-    @Step()
     public static void info(String msg) {
         init();
         log.info(msg);
+        report(msg);
     }
 
-    @Step
     public static void info(String format, Object arg) {
         init();
         log.info(format, arg);
+        report(format, arg);
     }
 
-    @Step
     public static void info(String format, Object arg1, Object arg2) {
         init();
         log.info(format, arg1, arg2);
+        report(format, arg1, arg2);
     }
 
-    @Step
     public static void info(String format, Object... arguments) {
         init();
         log.info(format, arguments);
+        report(format, arguments);
     }
 
-    @Step
     public static void info(String msg, Throwable t) {
         init();
         log.info(msg, t);
+        report(msg, t);
     }
 
     public static boolean isInfoEnabled(Marker marker) {
@@ -67,34 +72,34 @@ public class Log {
         return log.isInfoEnabled(marker);
     }
 
-    @Step
     public static void info(Marker marker, String msg) {
         init();
         log.info(marker, msg);
+        report(msg);
     }
 
-    @Step
     public static void info(Marker marker, String format, Object arg) {
         init();
         log.info(marker, format, arg);
+        report(format, arg);
     }
 
-    @Step
     public static void info(Marker marker, String format, Object arg1, Object arg2) {
         init();
         log.info(marker, format, arg1, arg2);
+        report(format, arg1, arg2);
     }
 
-    @Step
     public static void info(Marker marker, String format, Object... arguments) {
         init();
         log.info(marker, format, arguments);
+        report(format, arguments);
     }
 
-    @Step
     public static void info(Marker marker, String msg, Throwable t) {
         init();
         log.info(marker, msg, t);
+        report(msg, t);
     }
 
     public static boolean isWarnEnabled() {
@@ -102,34 +107,34 @@ public class Log {
         return log.isWarnEnabled();
     }
 
-    @Step
     public static void warn(String msg) {
         init();
         log.warn(msg);
+        report("[WARN] {}", msg);
     }
 
-    @Step
     public static void warn(String format, Object arg) {
         init();
         log.warn(format, arg);
+        report("[WARN] " + format, arg);
     }
 
-    @Step
     public static void warn(String format, Object... arguments) {
         init();
         log.warn(format, arguments);
+        report("[WARN] " + format, arguments);
     }
 
-    @Step
     public static void warn(String format, Object arg1, Object arg2) {
         init();
         log.warn(format, arg1, arg2);
+        report("[WARN] " + format, arg1, arg2);
     }
 
-    @Step
     public static void warn(String msg, Throwable t) {
         init();
         log.warn(msg, t);
+        report("[WARN] " + msg, t);
     }
 
     public static boolean isWarnEnabled(Marker marker) {
@@ -137,34 +142,34 @@ public class Log {
         return log.isWarnEnabled(marker);
     }
 
-    @Step
     public static void warn(Marker marker, String msg) {
         init();
         log.warn(marker, msg);
+        report("[WARN] {}", msg);
     }
 
-    @Step
     public static void warn(Marker marker, String format, Object arg) {
         init();
         log.warn(marker, format, arg);
+        report("[WARN] " + format, arg);
     }
 
-    @Step
     public static void warn(Marker marker, String format, Object arg1, Object arg2) {
         init();
         log.warn(marker, format, arg1, arg2);
+        report("[WARN] " + format, arg1, arg2);
     }
 
-    @Step
     public static void warn(Marker marker, String format, Object... arguments) {
         init();
         log.warn(marker, format, arguments);
+        report("[WARN] " + format, arguments);
     }
 
-    @Step
     public static void warn(Marker marker, String msg, Throwable t) {
         init();
         log.warn(marker, msg, t);
+        report("[WARN] " + msg, t);
     }
 
     public static boolean isErrorEnabled() {
@@ -172,70 +177,69 @@ public class Log {
         return log.isErrorEnabled();
     }
 
-    @Step
     public static void error(String msg) {
         init();
         log.error(msg);
+        report("[ERROR] {}", msg);
     }
 
-    @Step
     public static void error(String format, Object arg) {
         init();
         log.error(format, arg);
+        report("[ERROR] " + format, arg);
     }
 
-    @Step
     public static void error(String format, Object arg1, Object arg2) {
         init();
         log.error(format, arg1, arg2);
+        report("[ERROR] " + format, arg1, arg2);
     }
 
-    @Step
     public static void error(String format, Object... arguments) {
         init();
         log.error(format, arguments);
+        report("[ERROR] " + format, arguments);
     }
 
-    @Step
     public static void error(String msg, Throwable t) {
         init();
         log.error(msg, t);
+        report("[ERROR] " + msg, t);
     }
 
-    @Step
     public static boolean isErrorEnabled(Marker marker) {
         init();
         return log.isErrorEnabled(marker);
     }
 
-    @Step
     public static void error(Marker marker, String msg) {
         init();
         log.error(marker, msg);
+        report("[ERROR] {}", msg);
     }
 
-    @Step
     public static void error(Marker marker, String format, Object arg) {
         init();
         log.error(marker, format, arg);
+        report("[ERROR] " + format, arg);
     }
 
-    @Step
     public static void error(Marker marker, String format, Object arg1, Object arg2) {
         init();
         log.error(marker, format, arg1, arg2);
+        report("[ERROR] " + format, arg1, arg2);
     }
 
-    @Step
     public static void error(Marker marker, String format, Object... arguments) {
         init();
         log.error(marker, format, arguments);
+        report("[ERROR] " + format, arguments);
     }
 
-    @Step
     public static void error(Marker marker, String msg, Throwable t) {
         init();
         log.error(marker, msg, t);
+        report("[ERROR] " + msg, t);
     }
 
     public static String getName() {
@@ -361,5 +365,25 @@ public class Log {
     public static void trace(Marker marker, String msg, Throwable t) {
         init();
         log.trace(marker, msg, t);
+    }
+
+    @Step("{0}")
+    public static void report(String msg) {
+    }
+
+    public static void report(String format, Object arg) {
+        report(formatMessage(format, arg));
+    }
+
+    public static void report(String format, Object arg1, Object arg2) {
+        report(formatMessage(format, arg1, arg2));
+    }
+
+    public static void report(String format, Object... arguments) {
+        report(formatMessage(format, arguments));
+    }
+
+    public static void report(String msg, Throwable t) {
+        report(formatMessage(msg + " Exception:{}", t.getMessage()));
     }
 }

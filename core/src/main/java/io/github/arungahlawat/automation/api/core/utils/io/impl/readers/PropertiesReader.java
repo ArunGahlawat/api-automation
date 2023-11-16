@@ -1,4 +1,4 @@
-package io.github.arungahlawat.automation.api.core.utils.io.impl;
+package io.github.arungahlawat.automation.api.core.utils.io.impl.readers;
 
 import io.github.arungahlawat.automation.api.core.utils.Log;
 import io.github.arungahlawat.automation.api.core.utils.io.Reader;

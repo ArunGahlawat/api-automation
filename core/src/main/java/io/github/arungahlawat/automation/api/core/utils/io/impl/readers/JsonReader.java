@@ -1,15 +1,19 @@
-package io.github.arungahlawat.automation.api.core.utils.io.impl;
+package io.github.arungahlawat.automation.api.core.utils.io.impl.readers;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import io.github.arungahlawat.automation.api.core.utils.Log;
 import io.github.arungahlawat.automation.api.core.utils.io.Reader;
 
-import java.io.*;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 import static io.github.arungahlawat.automation.api.core.utils.io.FileUtils.transformFilePath;
 
-public class JsonReader implements Reader<String> {
+public class JsonReader implements Reader<JsonElement> {
     private static JsonReader instance;
 
     private JsonReader() {
@@ -22,23 +26,26 @@ public class JsonReader implements Reader<String> {
     }
 
     @Override
-    public String read(String filePath) {
+    public JsonElement read(String filePath) {
         filePath = transformFilePath(filePath);
-        com.google.gson.stream.JsonReader reader;
-        try {
-            reader = new Gson().newJsonReader(new FileReader(filePath));
-        } catch (FileNotFoundException e) {
+        try (com.google.gson.stream.JsonReader reader = new Gson().newJsonReader(new FileReader(filePath))) {
+            return JsonParser.parseReader(reader);
+        } catch (IOException e) {
             Log.warn("Could not read file at path {}. Exception:{}. Trying in resources ...", filePath, e.getMessage());
             ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
             try (InputStream inputStream = classLoader.getResourceAsStream(filePath)) {
                 if (inputStream == null)
                     throw new IOException("Could not read resource as stream");
-                reader = new Gson().newJsonReader(new InputStreamReader(inputStream));
+                JsonParser.parseReader(new Gson().newJsonReader(new InputStreamReader(inputStream)));
             } catch (IOException ex) {
                 Log.error("Error reading file {} in resources. Error: {}", filePath, ex.getMessage());
                 return null;
             }
         }
-        return JsonParser.parseReader(reader).toString();
+        return null;
+    }
+
+    public String readAsString(String filePath) {
+        return read(filePath).toString();
     }
 }

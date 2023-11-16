@@ -14,7 +14,7 @@ public class TestNGListener implements IExecutionListener {
 
     @Override
     public void onExecutionStart() {
-        Log.info("Max memory: {}", Runtime.getRuntime().maxMemory());
+        Log.report("Max memory: {}", Runtime.getRuntime().maxMemory());
     }
 
     @Override
@@ -39,7 +39,7 @@ public class TestNGListener implements IExecutionListener {
                     resultsDirectory = StringUtils.isNotBlank(resultsDirectory) ? resultsDirectory : FileUtils.transformFilePath("target/allure-results");
                 }
             }
-            Log.info("Copying allure history trends from {} to {}", reportDirectory, resultsDirectory);
+            Log.debug("Copying allure history trends from {} to {}", reportDirectory, resultsDirectory);
             try {
                 org.apache.commons.io.FileUtils.copyDirectoryToDirectory(
                         new File(reportDirectory + "/history"),

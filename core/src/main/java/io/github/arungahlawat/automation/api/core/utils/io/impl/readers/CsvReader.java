@@ -1,4 +1,4 @@
-package io.github.arungahlawat.automation.api.core.utils.io.impl;
+package io.github.arungahlawat.automation.api.core.utils.io.impl.readers;
 
 import io.github.arungahlawat.automation.api.core.Constants;
 import io.github.arungahlawat.automation.api.core.utils.Log;
@@ -26,18 +26,15 @@ public class CsvReader implements Reader<Iterator<Object[]>> {
     @Override
     public Iterator<Object[]> read(String filePath) {
         filePath = transformFilePath(filePath);
-        BufferedReader reader;
-        try {
-            reader = new BufferedReader(new FileReader(filePath));
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             return read(reader).iterator();
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             Log.warn("Could not read file at path {}. Exception:{}. Trying in resources ...", filePath, e.getMessage());
             ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
             try (InputStream inputStream = classLoader.getResourceAsStream(filePath)) {
                 if (inputStream == null)
                     throw new IOException("Could not read resource as stream");
-                reader = new BufferedReader(new InputStreamReader(inputStream));
-                return read(reader).iterator();
+                return read(new BufferedReader(new InputStreamReader(inputStream))).iterator();
             } catch (IOException ex) {
                 Log.error("Error reading file {} in resources. Error: {}", filePath, ex.getMessage());
             }
