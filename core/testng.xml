@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="Api automation core tests" parallel="methods">
+<suite name="Api automation core tests" parallel="methods" thread-count="10">
     <test name="Core: Unit tests">
         <groups>
             <run>
-                <include name="disabled"/>
-                <include name="enabled"/>
+                <exclude name="disabled"/>
             </run>
         </groups>
         <packages>
