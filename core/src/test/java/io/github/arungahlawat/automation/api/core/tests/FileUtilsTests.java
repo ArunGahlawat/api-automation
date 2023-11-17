@@ -1,6 +1,6 @@
 package io.github.arungahlawat.automation.api.core.tests;
 
-import io.github.arungahlawat.automation.api.core.Assert;
+import io.github.arungahlawat.automation.api.core.utils.Assert;
 import io.github.arungahlawat.automation.api.core.utils.io.FileUtils;
 import org.testng.annotations.Test;
 

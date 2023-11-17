@@ -1,6 +1,5 @@
-package io.github.arungahlawat.automation.api.core;
+package io.github.arungahlawat.automation.api.core.utils;
 
-import io.github.arungahlawat.automation.api.core.utils.Log;
 import io.github.arungahlawat.automation.api.core.utils.io.FileUtils;
 import io.qameta.allure.Step;
 import org.apache.commons.lang3.StringUtils;
